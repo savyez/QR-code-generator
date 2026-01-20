@@ -10,3 +10,21 @@ import qr from 'qr-image';
 import fs from 'fs';
 
 // Function to prompt user for a URL
+inquirer
+  .prompt([
+    {
+      type: 'input',
+      name: 'url',
+      message: 'Please enter a URL to generate a QR code:',
+      validate: function (input) {
+        var valid = input.startsWith('http://') || input.startsWith('https://');
+        return valid || 'Please enter a valid URL (must start with http:// or https://)';
+      }
+    },
+  ])
+  .then((answers) => {
+    const url = answers.url;
+  })
+  .catch((error) => {
+    console.error('Error during user input:', error);
+  });
