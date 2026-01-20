@@ -24,7 +24,10 @@ inquirer
   ])
   .then((answers) => {
     const url = answers.url;
+    var qr_svg = qr.image(url, { type: 'svg' });
+    qr_svg.pipe(fs.createWriteStream('qr_code.svg'));
   })
   .catch((error) => {
     console.error('Error during user input:', error);
   });
+
