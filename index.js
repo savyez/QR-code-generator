@@ -35,7 +35,7 @@ inquirer
 
 // Function to save the URL to a text file
 function saveUrlToFile(url) {
-  fs.writeFile('url.txt', url, (err) => {
+  fs.appendFile('url.txt', url + '\n', 'utf8', (err) => {
     if (err) {
       console.error('Error writing to file:', err);
     } else {
