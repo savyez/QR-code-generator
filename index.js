@@ -24,10 +24,22 @@ inquirer
   ])
   .then((answers) => {
     const url = answers.url;
-    var qr_svg = qr.image(url, { type: 'svg' });
-    qr_svg.pipe(fs.createWriteStream('qr_code.svg'));
+    var qr_svg = qr.image(url);
+    qr_svg.pipe(fs.createWriteStream('qr_code.png'));
+    saveUrlToFile(url);
   })
   .catch((error) => {
     console.error('Error during user input:', error);
   });
 
+
+// Function to save the URL to a text file
+function saveUrlToFile(url) {
+  fs.writeFile('url.txt', url, (err) => {
+    if (err) {
+      console.error('Error writing to file:', err);
+    } else {
+      console.log('URL saved to url.txt');
+    }
+  });
+}
